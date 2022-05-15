@@ -36,7 +36,7 @@ public class SumColumnTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new SumColumn();
             command.execute("sum", "A", "Z");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test

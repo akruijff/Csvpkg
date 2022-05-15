@@ -86,7 +86,7 @@ public class SumColumn extends AbstractCommand {
                             ? toDouble(row.column(index))
                             : toDouble(row.column(index)) + map.get(key));
                 } catch (Throwable e) {
-                    // There is no need to catch throwable since they are created in y()
+                    // There is no need to catch throwable since they are already in list.
                 }
             });
             return map;
@@ -97,7 +97,7 @@ public class SumColumn extends AbstractCommand {
             List<Row> mapped = firstRows.entrySet().stream().map(e -> {
                 Key k = e.getKey();
                 Row r = e.getValue();
-                Object[] cells = r.cells();
+                Object[] cells = r.cells().toArray();
                 cells[index] = sums.get(k);
                 return new Row(r.lineNumber(), cells);
             }).toList();
@@ -137,12 +137,8 @@ public class SumColumn extends AbstractCommand {
     }
 
     private static Double toDouble(Object t) {
-        if (t == null)
-            throw new UnsupportedOperationException();
-        if (t instanceof Double)
-            return (Double) t;
-        else if (t instanceof Integer)
-            return ((Integer) t).doubleValue();
-        throw new UnsupportedOperationException();
+        return t instanceof Double
+                ? (Double) t
+                : ((Number) t).doubleValue();
     }
 }

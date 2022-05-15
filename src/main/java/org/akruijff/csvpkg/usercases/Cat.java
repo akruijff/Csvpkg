@@ -1,7 +1,9 @@
 package org.akruijff.csvpkg.usercases;
 
 import org.akruijff.csvpkg.entities.*;
+import org.akruijff.csvpkg.exceptions.IOError;
 import org.akruijff.csvpkg.exceptions.*;
+import org.akruijff.csvpkg.usercases.util.*;
 
 import java.io.*;
 
@@ -19,11 +21,18 @@ public class Cat extends AbstractCommand {
     }
 
     @Override
-    protected void doPreExecute(String[] args) {
-        try {
-            System.setIn(new FileInputStream(new File(System.getProperty("user.dir"), args[1])));
+    protected Sheet doExecuteNested(Sheet sheet, String[] args) {
+        return doPreExecute(args);
+    }
+
+    @Override
+    protected Sheet doPreExecute(String[] args) {
+        try (InputStream in = new FileInputStream(new File(System.getProperty("user.dir"), args[1]))) {
+            return IOUtil.read(in, "stdin");
         } catch (FileNotFoundException e) {
             throw new FileNotFound(args[1]);
+        } catch (IOException e) {
+            throw new IOError(args[1]);
         }
     }
 

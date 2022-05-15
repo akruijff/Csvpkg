@@ -1,7 +1,7 @@
 package org.akruijff.csvpkg.usercases;
 
 import org.akruijff.csvpkg.*;
-import org.akruijff.csvpkg.exceptions.*;
+import org.akruijff.csvpkg.exceptions.IOError;
 import org.akruijff.csvpkg.usercases.util.*;
 import org.junit.jupiter.api.*;
 
@@ -47,10 +47,10 @@ public class AbstractCommandTest {
     public void malformed() {
         setup("\"A\",  B\",  \"C\", \"D\", \"E\"");
 
-        assertThrows(ReadError.class, () -> {
+        assertThrows(IOError.class, () -> {
             Command command = new DummyCommand();
             command.execute("command");
-        });
+        }, "Input/output error: stdin");
     }
 
     @Test

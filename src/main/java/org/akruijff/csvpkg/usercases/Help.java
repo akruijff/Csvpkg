@@ -4,7 +4,7 @@ import org.akruijff.csvpkg.*;
 import org.akruijff.csvpkg.entities.*;
 
 public class Help extends AbstractCommand {
-    private Command nested;
+    private final Command nested;
 
     public Help(Command nested) {
         this.nested = nested;
@@ -13,11 +13,6 @@ public class Help extends AbstractCommand {
     @Override
     protected boolean isInsufficient(String[] args) {
         return args.length < 2;
-    }
-
-    @Override
-    public void execute(String... args) {
-        nested.help(args);
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.akruijff.csvpkg.entities.*;
 public class GenericHelp extends AbstractCommand {
     @Override
     protected boolean isInsufficient(String[] args) {
-        throw new UnsupportedOperationException();
+        return true;
     }
 
     @Override
@@ -15,12 +15,12 @@ public class GenericHelp extends AbstractCommand {
                                 
                 usage: help <command>
                                 
-                commands: cat, clear, invert, map, remove, select, and sum                
+                commands: cat, clear, execute, invert, map, remove, select, and sum                
                 """);
     }
 
     @Override
     protected Sheet doExecute(Sheet sheet, String[] args) {
-        throw new UnsupportedOperationException();
+        return sheet;
     }
 }
