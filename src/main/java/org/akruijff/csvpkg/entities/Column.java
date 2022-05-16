@@ -2,9 +2,10 @@ package org.akruijff.csvpkg.entities;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 public class Column implements Comparable<Column> {
-    private String header;
+    private final String header;
     private final Object[] cells;
 
     public Column(String header, Object... cells) {
@@ -26,8 +27,12 @@ public class Column implements Comparable<Column> {
         return cells[index];
     }
 
-    public Object[] cells() {
-        return cells;
+    public Stream<Object> cells() {
+        return Arrays.stream(cells);
+    }
+
+    public int length() {
+        return cells.length;
     }
 
     @Override

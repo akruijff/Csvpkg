@@ -36,7 +36,7 @@ public class ClearCellTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("clear", "Z", "D", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ClearCellTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("clear", "A", "Z", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test

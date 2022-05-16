@@ -2,6 +2,7 @@ package org.akruijff.csvpkg.entities;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 public class Row implements Comparable<Row> {
     private final int lineNumber;
@@ -23,11 +24,11 @@ public class Row implements Comparable<Row> {
     }
 
     public Object column(int index) {
-        return cells[index];
+        return index < cells.length ? cells[index] : "";
     }
 
-    public Object[] cells() {
-        return cells;
+    public Stream<Object> cells() {
+        return Arrays.stream(cells);
     }
 
     public int length() {

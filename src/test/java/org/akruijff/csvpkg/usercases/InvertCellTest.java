@@ -36,7 +36,7 @@ public class InvertCellTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("invert", "Z", "D", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class InvertCellTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("invert", "A", "Z", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test

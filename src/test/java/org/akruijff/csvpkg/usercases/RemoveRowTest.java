@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
-import static org.akruijff.csvpkg.usercases.util.TestUtil.unifyNewLine;
+import static org.akruijff.csvpkg.usercases.util.TestUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RemoveRowTest extends BasisSheetSetup {
@@ -49,12 +49,12 @@ public class RemoveRowTest extends BasisSheetSetup {
     @DisplayName ("The remove command removes rows that match the search pattern")
     public void matchCaseInsensitive() throws IOException {
         Command command = new RemoveRow();
-        command.execute("remove", "B", "b[24]", "i");
+        command.execute("remove", "B", "b[13]", "i");
 
         String expected = """
                 "A","B","C","D","E"
-                "a1","b1","c","d","1"
-                "a3","B3","c","e","3"
+                "a2","b2","c","d","2.5"
+                "a4","B4","c","e","e4"
                 """;
         String actual = output.toString();
         assertEquals(unifyNewLine(expected), unifyNewLine(actual));

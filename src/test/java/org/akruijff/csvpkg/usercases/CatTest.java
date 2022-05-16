@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
-import static org.akruijff.csvpkg.usercases.util.TestUtil.unifyNewLine;
+import static org.akruijff.csvpkg.usercases.util.TestUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CatTest extends BasisSheetSetup {
@@ -34,14 +34,14 @@ public class CatTest extends BasisSheetSetup {
     public void fileNotFound() {
         assertThrows(FileNotFound.class, () -> {
             Command command = new Cat();
-            command.execute("cat", "non_existing.csv");
-        });
+            command.execute("cat", "build/resources/test/non_existing.csv");
+        }, "File not found: build/resources/test/non_existing.csv");
     }
 
     @Test
     public void fileFound() throws IOException {
         Command command = new Cat();
-        command.execute("cat", "src/test/resources/example.csv");
+        command.execute("cat", "build/resources/test/example.csv");
 
         String expected = """
                 "name","date","count","description","replaces_product","approved"

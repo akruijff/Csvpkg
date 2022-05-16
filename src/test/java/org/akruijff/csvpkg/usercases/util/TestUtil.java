@@ -10,10 +10,10 @@ public class TestUtil {
 
         String line;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream printer = new PrintStream(out);
-        while ((line = reader.readLine()) != null)
-            printer.println(line);
-        printer.close();
+        try (PrintStream printer = new PrintStream(out)) {
+            while ((line = reader.readLine()) != null)
+                printer.println(line);
+        }
         return out.toString();
     }
 }

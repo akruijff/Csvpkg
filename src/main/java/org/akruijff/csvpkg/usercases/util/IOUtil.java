@@ -3,23 +3,23 @@ package org.akruijff.csvpkg.usercases.util;
 import com.opencsv.*;
 import com.opencsv.exceptions.*;
 import org.akruijff.csvpkg.entities.*;
-import org.akruijff.csvpkg.exceptions.*;
+import org.akruijff.csvpkg.exceptions.IOError;
 
 import java.io.*;
 import java.util.*;
 import java.util.function.*;
 
 public class IOUtil {
-    public static Sheet read() {
-        try (CSVReader reader = new CSVReader(new BufferedReader(new InputStreamReader(System.in)))) {
+    public static Sheet read(InputStream in, String label) {
+        try (CSVReader reader = new CSVReader(new BufferedReader(new InputStreamReader(in)))) {
             Headers headers = readHeaders(reader);
             if (headers.length() == 0)
                 return new Sheet();
 
-            Row[] rows = readRows(reader, headers.length());
+            Row[] rows = readRows(reader);
             return new Sheet(headers, rows);
         } catch (IOException e) {
-            throw new ReadError();
+            throw new IOError(label);
         } catch (CsvValidationException e) { // thrown when a user-defined validator fail
             throw new UnsupportedOperationException();
         }
@@ -28,12 +28,12 @@ public class IOUtil {
     private static Headers readHeaders(CSVReader reader) throws IOException, CsvValidationException {
         String[] arr = reader.readNext();
         if (arr == null)
-            return new Headers(new String[0]);
+            return new Headers();
         String[] trimmed = Arrays.stream(arr).map(String::trim).toArray(String[]::new);
         return new Headers(trimmed);
     }
 
-    private static Row[] readRows(CSVReader reader, int columns) throws IOException, CsvValidationException {
+    private static Row[] readRows(CSVReader reader) throws IOException, CsvValidationException {
         String[] line;
         List<Row> list = new ArrayList<>();
         int lineNumber = 1;
@@ -45,7 +45,7 @@ public class IOUtil {
             list.add(new Row(lineNumber, cells));
             ++lineNumber;
         }
-        return list.toArray(new Row[list.size()]);
+        return list.toArray(new Row[0]);
     }
 
     private static Object convert(String value) {
@@ -79,7 +79,7 @@ public class IOUtil {
     }
 
     private static void writeData(Sheet sheet) {
-        sheet.rows().forEach(row -> writeRow(row));
+        sheet.rows().forEach(IOUtil::writeRow);
     }
 
     private static void writeRow(Row row) {

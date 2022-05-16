@@ -1,0 +1,3 @@
+"command", "arguments"
+"invert", "B", "E", "B[1-3]"
+"invert", "B", "E", "b[124]", "i"

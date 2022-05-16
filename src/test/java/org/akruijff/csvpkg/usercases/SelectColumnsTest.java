@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
-import static org.akruijff.csvpkg.usercases.util.TestUtil.unifyNewLine;
+import static org.akruijff.csvpkg.usercases.util.TestUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SelectColumnsTest extends BasisSheetSetup {
@@ -31,7 +31,7 @@ public class SelectColumnsTest extends BasisSheetSetup {
 
     @Test
     @DisplayName ("The select command returns an empty sheet when no match is found")
-    public void columnNotFound() throws IOException {
+    public void noMatches() throws IOException {
         Command command = new SelectColumns();
         command.execute("select", "Z");
 
@@ -42,7 +42,7 @@ public class SelectColumnsTest extends BasisSheetSetup {
 
     @Test
     @DisplayName ("The select command keeps the specified columns and removes all other columns")
-    public void columnsFound() throws IOException {
+    public void matches() throws IOException {
         Command command = new SelectColumns();
         command.execute("select", "A", "B");
 

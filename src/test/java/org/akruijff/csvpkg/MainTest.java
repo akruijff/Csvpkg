@@ -41,7 +41,7 @@ public class MainTest {
     }
 
     @ParameterizedTest
-    @CsvSource ({"cat", "clear", "invert", "map", "remove", "select", "sum"})
+    @CsvSource ({"cat", "clear", "execute", "invert", "map", "remove", "select", "sum"})
     public void helpArgumentWithCommand(String command) {
         Main.main(new String[]{"help", command});
 

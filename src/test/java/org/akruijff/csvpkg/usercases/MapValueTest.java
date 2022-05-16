@@ -35,7 +35,7 @@ public class MapValueTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("map", "Z", "D", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class MapValueTest extends BasisSheetSetup {
         assertThrows(ColumnNotFound.class, () -> {
             Command command = new ClearCell();
             command.execute("map", "A", "Z", "a[12]");
-        });
+        }, "Column 'Z' not found.");
     }
 
     @Test
@@ -85,14 +85,14 @@ public class MapValueTest extends BasisSheetSetup {
     @DisplayName ("The map command replaces the modification column with the literal text when a match is found")
     public void matchCaseInsensitive() throws IOException {
         Command command = new MapValue();
-        command.execute("map", "B", "C", "X", "b[24]", "i");
+        command.execute("map", "B", "C", "X", "b[13]", "i");
 
         String expected = """
                 "A","B","C","D","E"
-                "a1","b1","c","d","1"
-                "a2","b2","X","d","2.5"
-                "a3","B3","c","e","3"
-                "a4","B4","X","e","e4"
+                "a1","b1","X","d","1"
+                "a2","b2","c","d","2.5"
+                "a3","B3","X","e","3"
+                "a4","B4","c","e","e4"
                 """;
         String actual = output.toString();
         assertEquals(unifyNewLine(expected), unifyNewLine(actual));
