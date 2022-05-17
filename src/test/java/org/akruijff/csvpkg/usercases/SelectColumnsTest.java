@@ -35,9 +35,7 @@ public class SelectColumnsTest extends BasisSheetSetup {
         Command command = new SelectColumns();
         command.execute("select", "Z");
 
-        String expected = "";
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+        assertOutput("");
     }
 
     @Test
@@ -46,14 +44,12 @@ public class SelectColumnsTest extends BasisSheetSetup {
         Command command = new SelectColumns();
         command.execute("select", "A", "B");
 
-        String expected = """
+        assertOutput("""
                 "A","B"
                 "a1","b1"
                 "a2","b2"
                 "a3","B3"
                 "a4","B4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

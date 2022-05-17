@@ -54,15 +54,13 @@ public class InvertCellTest extends BasisSheetSetup {
         Command command = new InvertCell();
         command.execute("invert", "A", "E", "a4");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d","2.5"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        Assertions.assertEquals(TestUtil.unifyNewLine(expected), TestUtil.unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -71,15 +69,13 @@ public class InvertCellTest extends BasisSheetSetup {
         Command command = new InvertCell();
         command.execute("invert", "B", "E", "B[1-3]");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d","2.5"
                 "a3","B3","c","e","-3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        Assertions.assertEquals(TestUtil.unifyNewLine(expected), TestUtil.unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -88,14 +84,12 @@ public class InvertCellTest extends BasisSheetSetup {
         Command command = new InvertCell();
         command.execute("invert", "B", "E", "b[124]", "i");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","-1"
                 "a2","b2","c","d","-2.5"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        Assertions.assertEquals(TestUtil.unifyNewLine(expected), TestUtil.unifyNewLine(actual));
+                """);
     }
 }

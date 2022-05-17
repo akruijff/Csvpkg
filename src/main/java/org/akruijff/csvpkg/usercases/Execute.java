@@ -72,8 +72,15 @@ public class Execute extends AbstractCommand {
     }
 
     private Sheet executeLine(Sheet sheet, String[] args) {
-        Command command = createCommand(args);
-        return command.executeNested(sheet, args);
+        try {
+            Command command = createCommand(args);
+            return command.executeNested(sheet, args);
+        } catch (RecursiveCallDetected e) {
+            throw e;
+        } catch(Exception e) {
+            System.err.println("Failed to execute: " + getLine(args));
+            return sheet;
+        }
     }
 
     private Command createCommand(String[] args) {

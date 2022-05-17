@@ -5,12 +5,25 @@ import org.junit.jupiter.api.*;
 import java.io.*;
 import java.nio.charset.*;
 
+import static org.akruijff.csvpkg.usercases.util.TestUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BasisSheetSetup {
     protected OutputStream output;
     protected OutputStream error;
     private InputStream oldIn;
     private PrintStream oldOut;
     private PrintStream oldErr;
+
+    protected void assertOutput(String expected) throws IOException {
+        String actual = output.toString();
+        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+    }
+
+    protected void assertError(String expected) throws IOException {
+        String actual = error.toString();
+        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+    }
 
     @BeforeEach
     public void setup() {

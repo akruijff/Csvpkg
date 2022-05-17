@@ -1,0 +1,2 @@
+"command", "arguments"
+"execute", "build/resources/test/unsupported_command.csv"

@@ -54,15 +54,13 @@ public class ClearCellTest extends BasisSheetSetup {
         Command command = new ClearCell();
         command.execute("clear", "A", "E", "a5");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d","2.5"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -71,15 +69,13 @@ public class ClearCellTest extends BasisSheetSetup {
         Command command = new ClearCell();
         command.execute("clear", "B", "E", "b[23]");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d",""
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -88,14 +84,12 @@ public class ClearCellTest extends BasisSheetSetup {
         Command command = new ClearCell();
         command.execute("clear", "B", "E", "b[23]", "i");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d",""
                 "a3","B3","c","e",""
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

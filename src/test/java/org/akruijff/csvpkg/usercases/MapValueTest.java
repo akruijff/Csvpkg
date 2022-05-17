@@ -53,15 +53,13 @@ public class MapValueTest extends BasisSheetSetup {
         Command command = new MapValue();
         command.execute("map", "B", "C", "X", "Z[24]");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","c","d","2.5"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -70,15 +68,13 @@ public class MapValueTest extends BasisSheetSetup {
         Command command = new MapValue();
         command.execute("map", "B", "C", "X", "b[24]");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a2","b2","X","d","2.5"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -87,14 +83,12 @@ public class MapValueTest extends BasisSheetSetup {
         Command command = new MapValue();
         command.execute("map", "B", "C", "X", "b[13]", "i");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","X","d","1"
                 "a2","b2","c","d","2.5"
                 "a3","B3","X","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

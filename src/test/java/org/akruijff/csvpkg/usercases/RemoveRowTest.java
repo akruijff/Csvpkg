@@ -35,14 +35,12 @@ public class RemoveRowTest extends BasisSheetSetup {
         Command command = new RemoveRow();
         command.execute("remove", "B", "b[24]");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a1","b1","c","d","1"
                 "a3","B3","c","e","3"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 
     @Test
@@ -51,12 +49,10 @@ public class RemoveRowTest extends BasisSheetSetup {
         Command command = new RemoveRow();
         command.execute("remove", "B", "b[13]", "i");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a2","b2","c","d","2.5"
                 "a4","B4","c","e","e4"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

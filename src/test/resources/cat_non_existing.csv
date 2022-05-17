@@ -1,0 +1,2 @@
+"command", "arguments"
+"cat", "build/resources/test/data/non_existing.csv"

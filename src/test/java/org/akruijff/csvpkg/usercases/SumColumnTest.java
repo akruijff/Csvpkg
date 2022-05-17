@@ -45,13 +45,11 @@ public class SumColumnTest extends BasisSheetSetup {
         Command command = new SumColumn();
         command.execute("sum", "E", "C", "D");
 
-        String expected = """
+        assertOutput("""
                 "A","B","C","D","E"
                 "a4","B4","c","e","e4"
                 "a1","b1","c","d","3.5"
                 "a3","B3","c","e","3.0"
-                """;
-        String actual = output.toString();
-        Assertions.assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

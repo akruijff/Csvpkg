@@ -34,22 +34,20 @@ public class CatTest extends BasisSheetSetup {
     public void fileNotFound() {
         assertThrows(FileNotFound.class, () -> {
             Command command = new Cat();
-            command.execute("cat", "build/resources/test/non_existing.csv");
-        }, "File not found: build/resources/test/non_existing.csv");
+            command.execute("cat", "build/resources/test/data/non_existing.csv");
+        }, "File not found: build/resources/test/data/non_existing.csv");
     }
 
     @Test
     public void fileFound() throws IOException {
         Command command = new Cat();
-        command.execute("cat", "build/resources/test/example.csv");
+        command.execute("cat", "build/resources//test/data/example.csv");
 
-        String expected = """
+        assertOutput("""
                 "name","date","count","description","replaces_product","approved"
                 "Inflatable Elephant, African","2013-09-23","5","Found in Africa.
                 They live in dense forests, mopane and miombo woodlands, Sahelian scrub or deserts.","null","true"
                 "Large Mouse","2013-08-19","3","A "largish" mouse","General Mouse","false"
-                """;
-        String actual = output.toString();
-        assertEquals(unifyNewLine(expected), unifyNewLine(actual));
+                """);
     }
 }

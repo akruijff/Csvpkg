@@ -1,0 +1,2 @@
+"command", "arguments"
+"execute", "build/resources/test/invert_too_few_arguments.csv"
